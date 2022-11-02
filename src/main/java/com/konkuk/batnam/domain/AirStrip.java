@@ -1,9 +1,12 @@
 package com.konkuk.batnam.domain;
 
 import lombok.*;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -19,18 +22,16 @@ public class AirStrip {
     @Column(name = "air_strip_id")
     private Long id;
 
-    @Column(name = "air_strip_code", columnDefinition = "VARCHAR(12)")
-    private String code;
-
     @Column(name = "air_strip_name", columnDefinition = "VARCHAR(50)")
     private String name;
 
-    @Column(name = "air_strip_direction", columnDefinition = "INTEGER")
-    private String direction;
+    @Column(name = "air_strip_start_zone", columnDefinition = "VARCHAR(10)")
+    private String startZone;
 
-    @Column(name = "air_strip_last_date")
-    private LocalDate lastDate;
+    @Column(name = "air_strip_end_zone", columnDefinition = "VARCHAR(10)")
+    private String endZone;
 
+    @Builder.Default
     @OneToMany(mappedBy = "airStrip")
     private List<Sector> sectorList = new ArrayList<>();
 

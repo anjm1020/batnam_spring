@@ -8,17 +8,15 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class AirStripCreateDto {
+public class AirStripUpdateDto {
+    private Long id;
     private String name;
     private String startZone;
     private String endZone;
 
-    public AirStrip toEntity() {
-        return AirStrip.builder()
-                .name(this.name)
-                .startZone(this.startZone)
-                .endZone(this.endZone)
-                .build();
+    public void update(AirStrip entity) {
+        entity.setName(this.name);
+        entity.setStartZone(this.startZone);
+        entity.setEndZone(this.endZone);
     }
-
 }
