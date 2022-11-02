@@ -22,10 +22,13 @@ public class Sector {
     private String name;
 
     @Column(name = "sector_cam_url",columnDefinition = "VARCHAR(2083)")
-    private String camUrl;
+    private String camURL;
 
-    @Column(name = "sector_sequence",columnDefinition = "INTEGER")
-    private String sequence;
+    @Column(name = "sector_x",columnDefinition = "VARCHAR(20)")
+    private String x;
+
+    @Column(name = "sector_y",columnDefinition = "VARCHAR(20)")
+    private String y;
 
     @ManyToOne
     @JoinColumn(name = "air_strip_id")
