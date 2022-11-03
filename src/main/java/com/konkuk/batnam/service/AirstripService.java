@@ -46,5 +46,4 @@ public class AirstripService {
         }
         airStripRepository.delete(optional.get());
     }
-
 }

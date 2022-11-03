@@ -4,6 +4,7 @@ import com.konkuk.batnam.domain.AirStrip;
 import com.konkuk.batnam.domain.Sector;
 import com.konkuk.batnam.dto.request.airstrip.AirStripCreateDto;
 import com.konkuk.batnam.dto.request.sector.SectorCreateDto;
+import com.konkuk.batnam.dto.request.sector.SectorUpdateDto;
 import com.konkuk.batnam.dto.response.AirStripResponseDto;
 import com.konkuk.batnam.dto.response.SectorResponseDto;
 import com.konkuk.batnam.repository.AirStripRepository;
@@ -64,5 +65,44 @@ class SectorServiceTest {
         assertEquals(x, entity.getX());
         assertEquals(y, entity.getY());
         assertEquals(airStrip.getName(), entity.getAirStrip().getName());
+    }
+
+    @Test
+    void updateSector() {
+        AirStripResponseDto airStrip = createAirStrip();
+        String name = "test";
+        String camURL = "MY_URL";
+        String x = "111";
+        String y = "222";
+
+        SectorResponseDto res = sectorService.createSector(new SectorCreateDto(name, camURL, x, y, airStrip.getId()));
+        String newName = "TEST1";
+        String newX = "123213";
+        Long id = sectorService.updateSector(new SectorUpdateDto(res.getId(), newName, camURL, newX, y));
+
+        Optional<Sector> optional = sectorRepository.findById(id);
+
+        assertEquals(false, optional.isEmpty());
+        Sector entity = optional.get();
+        assertEquals(newName, entity.getName());
+        assertEquals(camURL, entity.getCamURL());
+        assertEquals(newX, entity.getX());
+        assertEquals(y, entity.getY());
+    }
+
+    @Test
+    void deleteSector() {
+        AirStripResponseDto airStrip = createAirStrip();
+        String name = "test";
+        String camURL = "MY_URL";
+        String x = "111";
+        String y = "222";
+
+        SectorResponseDto res = sectorService.createSector(new SectorCreateDto(name, camURL, x, y, airStrip.getId()));
+
+        sectorService.deleteSector(res.getId());
+
+        Optional<Sector> optional = sectorRepository.findById(res.getId());
+        assertEquals(true, optional.isEmpty());
     }
 }

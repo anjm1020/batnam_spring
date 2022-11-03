@@ -34,6 +34,7 @@ public class Sector {
     @JoinColumn(name = "air_strip_id")
     private AirStrip airStrip;
 
+    @Builder.Default
     @OneToMany(mappedBy = "sector")
     private List<Log> logList = new ArrayList<>();
 

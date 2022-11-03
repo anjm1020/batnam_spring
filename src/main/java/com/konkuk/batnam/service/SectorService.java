@@ -3,6 +3,7 @@ package com.konkuk.batnam.service;
 import com.konkuk.batnam.domain.AirStrip;
 import com.konkuk.batnam.domain.Sector;
 import com.konkuk.batnam.dto.request.sector.SectorCreateDto;
+import com.konkuk.batnam.dto.request.sector.SectorUpdateDto;
 import com.konkuk.batnam.dto.response.SectorResponseDto;
 import com.konkuk.batnam.repository.AirStripRepository;
 import com.konkuk.batnam.repository.SectorRepository;
@@ -10,7 +11,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,5 +26,22 @@ public class SectorService {
         Sector saved = sectorRepository.save(dto.toEntity(optional.get()));
         return SectorResponseDto.toResponseDto(saved);
     }
+
+    @Transactional
+    public Long updateSector(SectorUpdateDto dto) {
+        Optional<Sector> optional = sectorRepository.findById(dto.getId());
+        if (optional.isEmpty()) return null;
+        Sector entity = optional.get();
+        dto.update(entity);
+        return entity.getId();
+    }
+
+    @Transactional
+    public void deleteSector(Long id) {
+        Optional<Sector> optional = sectorRepository.findById(id);
+        if (optional.isEmpty()) return;
+        sectorRepository.delete(optional.get());
+    }
+
 
 }
