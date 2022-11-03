@@ -44,4 +44,8 @@ public class ObservationObject {
     @LastModifiedDate
     @Column(name = "object_last_date")
     private LocalDateTime lastDate;
+
+    public void addCount() {
+        this.count++;
+    }
 }
