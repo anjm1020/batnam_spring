@@ -1,6 +1,5 @@
 package com.konkuk.batnam.service;
 
-import com.konkuk.batnam.domain.AirStrip;
 import com.konkuk.batnam.domain.Sector;
 import com.konkuk.batnam.dto.request.airstrip.AirStripCreateDto;
 import com.konkuk.batnam.dto.request.sector.SectorCreateDto;
@@ -27,7 +26,7 @@ class SectorServiceTest {
     @Autowired
     SectorService sectorService;
     @Autowired
-    AirstripService airstripService;
+    AirStripService airstripService;
 
     @Autowired
     SectorRepository sectorRepository;

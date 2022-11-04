@@ -23,7 +23,9 @@ public class SectorService {
     public SectorResponseDto createSector(SectorCreateDto dto) {
         Optional<AirStrip> optional = airStripRepository.findById(dto.getAirStripId());
         if (optional.isEmpty()) return null;
-        Sector saved = sectorRepository.save(dto.toEntity(optional.get()));
+        AirStrip airStrip = optional.get();
+        Sector saved = sectorRepository.save(dto.toEntity(airStrip));
+        airStrip.addSector(saved);
         return SectorResponseDto.toResponseDto(saved);
     }
 
@@ -40,7 +42,9 @@ public class SectorService {
     public void deleteSector(Long id) {
         Optional<Sector> optional = sectorRepository.findById(id);
         if (optional.isEmpty()) return;
-        sectorRepository.delete(optional.get());
+        Sector sector = optional.get();
+        sector.getAirStrip().deleteSector(sector);
+        sectorRepository.delete(sector);
     }
 
 

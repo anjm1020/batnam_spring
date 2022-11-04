@@ -5,6 +5,8 @@ import com.konkuk.batnam.dto.request.airstrip.AirStripCreateDto;
 import com.konkuk.batnam.dto.request.airstrip.AirStripUpdateDto;
 import com.konkuk.batnam.dto.response.AirStripResponseDto;
 import com.konkuk.batnam.repository.AirStripRepository;
+import com.konkuk.batnam.repository.ResponderRepository;
+import com.konkuk.batnam.repository.SectorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,8 +15,10 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class AirstripService {
+public class AirStripService {
     private final AirStripRepository airStripRepository;
+    private final SectorRepository sectorRepository;
+    private final ResponderRepository responderRepository;
 
     @Transactional
     public AirStripResponseDto createAirStrip(AirStripCreateDto dto) {
@@ -32,7 +36,7 @@ public class AirstripService {
     @Transactional
     public Long updateAirStrip(AirStripUpdateDto dto) {
         Optional<AirStrip> optional = airStripRepository.findById(dto.getId());
-        if(optional.isEmpty()) return null;
+        if (optional.isEmpty()) return null;
         AirStrip entity = optional.get();
         dto.update(entity);
         return entity.getId();
@@ -44,6 +48,11 @@ public class AirstripService {
         if (optional.isEmpty()) {
             return;
         }
-        airStripRepository.delete(optional.get());
+        AirStrip airStrip = optional.get();
+        airStrip.getSectorList().stream()
+                .forEach(sector -> sectorRepository.delete(sector)
+                );
+        responderRepository.deleteAllByAirStrip(airStrip);
+        airStripRepository.delete(airStrip);
     }
 }

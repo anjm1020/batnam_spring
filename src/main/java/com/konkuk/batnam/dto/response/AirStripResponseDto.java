@@ -16,7 +16,7 @@ public class AirStripResponseDto {
     private String name;
     private String startZone;
     private String endZone;
-    private List<Long> sectorList;
+    private List<SectorResponseDto> sectorList;
 
     public static AirStripResponseDto toResponseDto(AirStrip entity) {
         return new AirStripResponseDto(
@@ -25,7 +25,7 @@ public class AirStripResponseDto {
                 entity.getStartZone(),
                 entity.getEndZone(),
                 entity.getSectorList().stream()
-                        .map(sector -> sector.getId())
+                        .map(sector -> SectorResponseDto.toResponseDto(sector))
                         .collect(Collectors.toList())
         );
     }

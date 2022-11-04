@@ -1,5 +1,6 @@
 package com.konkuk.batnam.dto.response;
 
+import com.konkuk.batnam.domain.Log;
 import lombok.*;
 
 @Getter
@@ -14,4 +15,15 @@ public class LogResponseDto {
     private String result;
     private String resultURL;
     private Long sectorId;
+
+    public static LogResponseDto toResponseDto(Log entity) {
+        return new LogResponseDto(
+                entity.getId(),
+                entity.getLogDate().toString(),
+                entity.getCaptureURL(),
+                entity.getResult(),
+                entity.getResultURL(),
+                entity.getSector().getId()
+        );
+    }
 }

@@ -30,7 +30,7 @@ class ResponderServiceTest {
     ResponderRepository responderRepository;
 
     @Autowired
-    AirstripService airstripService;
+    AirStripService airstripService;
 
     @Autowired
     AirStripRepository airStripRepository;

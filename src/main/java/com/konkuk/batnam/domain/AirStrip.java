@@ -35,4 +35,11 @@ public class AirStrip {
     @OneToMany(mappedBy = "airStrip")
     private List<Sector> sectorList = new ArrayList<>();
 
+    public void addSector(Sector sector) {
+        sectorList.add(sector);
+    }
+
+    public void deleteSector(Sector sector) {
+        sectorList.remove(sector);
+    }
 }
