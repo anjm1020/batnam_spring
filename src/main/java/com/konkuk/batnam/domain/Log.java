@@ -24,20 +24,19 @@ public class Log {
     @Column(name = "log_date")
     private LocalDateTime logDate;
 
+    @Column(name = "log_object_name", columnDefinition = "VARCHAR(50)")
+    private String objectName;
+
     @Column(name = "log_capture_image_url",columnDefinition = "VARCHAR(2083)")
     private String captureURL;
 
     @Column(name = "log_result",columnDefinition = "VARCHAR(255)")
     private String result;
 
-    @Column(name = "log_result_imgae_url", columnDefinition = "VARCHAR(2083)")
+    @Column(name = "log_result_image_url", columnDefinition = "VARCHAR(2083)")
     private String resultURL;
 
     @ManyToOne
     @JoinColumn(name = "sector_id")
     private Sector sector;
-
-    @OneToOne
-    @JoinColumn(name = "object_id")
-    private ObservationObject object;
 }

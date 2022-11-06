@@ -1,4 +1,4 @@
-package com.konkuk.batnam.dto.response;
+package com.konkuk.batnam.dto.response.log;
 
 import com.konkuk.batnam.domain.Log;
 import lombok.*;
