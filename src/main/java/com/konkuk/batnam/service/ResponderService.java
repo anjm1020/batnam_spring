@@ -11,7 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -25,6 +27,17 @@ public class ResponderService {
         if(optional.isEmpty()) return null;
         Responder saved = responderRepository.save(dto.toEntity(optional.get()));
         return ResponderResponseDto.toResponseDto(saved);
+    }
+
+    @Transactional
+    public List<ResponderResponseDto> findAllByStripId(Long stripId) {
+        Optional<AirStrip> optional = airStripRepository.findById(stripId);
+        if(optional.isEmpty()) return null;
+        AirStrip airStrip = optional.get();
+        return responderRepository.findAllByAirStrip(airStrip)
+                .stream()
+                .map(responder -> ResponderResponseDto.toResponseDto(responder))
+                .collect(Collectors.toList());
     }
 
     @Transactional
