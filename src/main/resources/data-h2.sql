@@ -34,7 +34,7 @@ insert into log(log_object_name, log_date, log_capture_image_url, log_result_ima
 values ('BIRD', '2022-10-30T22:32:44.638061', 'url', 'url', 'res', 1);
 
 insert into responder (responder_name, responder_type, responder_detail, responder_dest, air_strip_id)
-values ("배트맨ADMIN_BE", "ADMIN", "뱉맨", "anjm1020@gmail.com", 1);
+values ('admin1', 'ADMIN', 'batman', 'anjm1020@gmail.com', 1);
 insert into responder (responder_name, responder_type, responder_detail, responder_dest, air_strip_id)
-values ("배트맨ADMIN_INFRA", "ADMIN", "뱉맨", "ksun4131@gmail.com", 1);
+values ('admin2', 'ADMIN', 'batman', 'ksun4131@gmail.com', 1);
 
