@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/logs", produces = "application/json; charset=UTF8")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class LogController {
 
     private final LogService logService;

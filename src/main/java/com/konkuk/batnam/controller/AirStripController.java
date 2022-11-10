@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/airstrips", produces = "application/json; charset=UTF8")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class AirStripController {
 
     private final AirStripService airstripService;

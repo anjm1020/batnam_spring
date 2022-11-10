@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/responders", produces = "application/json; charset=UTF8")
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class ResponderController {
 
     private final ResponderService responderService;
@@ -34,7 +35,7 @@ public class ResponderController {
         return responderService.updateResponder(dto);
     }
 
-    @Operation(summary = "비상 연락망 삭제",description = "비상 연락망 삭제 api")
+    @Operation(summary = "비상 연락망 삭제",description = "비상 연락망 삭제    api")
     @DeleteMapping("/{id}")
     public void deleteResponder(@PathVariable Long id) {
         responderService.deleteResponder(id);
