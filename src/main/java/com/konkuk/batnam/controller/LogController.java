@@ -5,11 +5,13 @@ import com.konkuk.batnam.dto.response.ListResponseDto;
 import com.konkuk.batnam.dto.response.log.LogListByDayResponseDto;
 import com.konkuk.batnam.dto.response.log.LogResponseDto;
 import com.konkuk.batnam.service.LogService;
+import com.konkuk.batnam.service.ResponderService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
 import java.time.LocalDateTime;
 
 @RestController
@@ -19,11 +21,16 @@ import java.time.LocalDateTime;
 public class LogController {
 
     private final LogService logService;
+    private final ResponderService responderService;
 
     @Operation(summary = "로그 생성 (클라이언트 사용x)",description = "로그 생성 api")
     @PostMapping
-    public LogResponseDto createLog(@RequestBody LogCreateDto dto) {
-        return logService.createLog(dto);
+    public LogResponseDto createLog(@RequestBody LogCreateDto dto) throws MessagingException {
+        LogResponseDto responseDto = logService.createLog(dto);
+        if (dto.getIsCritical()) {
+            responderService.sendMailToResponder(responseDto);
+        }
+        return responseDto;
     }
     @Operation(summary = "섹터 별 로그 조회",description = "섹터 id, 페이지네이션 쿼리 파라미터 받음\n" +
             "page,size만 넣어서 사용")

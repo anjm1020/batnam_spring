@@ -103,5 +103,4 @@ public class LogService {
         if (optional.isEmpty()) return;
         logRepository.delete(optional.get());
     }
-
 }

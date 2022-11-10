@@ -11,6 +11,7 @@ import lombok.*;
 public class LogResponseDto {
     private Long id;
     private String logDate;
+    private String objectName;
     private String captureURL;
     private String result;
     private String resultURL;
@@ -20,6 +21,7 @@ public class LogResponseDto {
         return new LogResponseDto(
                 entity.getId(),
                 entity.getLogDate().toString(),
+                entity.getObjectName(),
                 entity.getCaptureURL(),
                 entity.getResult(),
                 entity.getResultURL(),

@@ -60,7 +60,7 @@ class LogControllerTest {
     void createLog() throws Exception {
         AirStripResponseDto strip = createStrip();
         SectorResponseDto sector = createSector(strip.getId());
-        LogCreateDto createDto = new LogCreateDto("oName", "url", "result", "rUrl", sector.getId());
+        LogCreateDto createDto = new LogCreateDto("oName", "url", "result", "rUrl", sector.getId(),true);
 
         String res = mockMvc.perform(post("/logs")
                         .content(objectMapper.writeValueAsString(createDto))
@@ -89,12 +89,12 @@ class LogControllerTest {
 
         int aCount = 30;
         for (int i = 0; i < aCount; i++) {
-            logService.createLog(new LogCreateDto("oN", "cUrl", "res", "resURL", sectorA.getId()));
+            logService.createLog(new LogCreateDto("oN", "cUrl", "res", "resURL", sectorA.getId(),false));
         }
 
         int bCount = 15;
         for (int i = 0; i < bCount; i++) {
-            logService.createLog(new LogCreateDto("oN", "cUrl", "res", "resURL", sectorB.getId()));
+            logService.createLog(new LogCreateDto("oN", "cUrl", "res", "resURL", sectorB.getId(),false));
         }
 
         String res = mockMvc.perform(get("/logs/byStrip/" + stripA.getId())

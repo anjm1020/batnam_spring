@@ -17,6 +17,17 @@ public class LogCreateDto {
 
     private Long sectorId;
 
+    private Boolean isCritical=false;
+
+    public LogCreateDto(String objectName, String captureURL, String result, String resultURL, Long sectorId) {
+        this.objectName = objectName;
+        this.captureURL = captureURL;
+        this.result = result;
+        this.resultURL = resultURL;
+        this.sectorId = sectorId;
+        this.isCritical = false;
+    }
+
     public Log toEntity(Sector sector) {
         return Log.builder()
                 .captureURL(this.captureURL)
