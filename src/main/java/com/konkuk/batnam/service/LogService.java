@@ -80,10 +80,15 @@ public class LogService {
         res.sort(new Comparator<Log>() {
             @Override
             public int compare(Log o1, Log o2) {
-                return o1.getLogDate().isAfter(o2.getLogDate()) ? 1 : -1;
+                return o1.getLogDate().isAfter(o2.getLogDate()) ? -1 : 1;
             }
         });
-
+        if (pageable.getPageSize() >= res.size()) {
+            return toResponseDto(res.stream()
+                            .map(log -> LogResponseDto.toResponseDto(log))
+                            .collect(Collectors.toList())
+                    , res.size(), pageable);
+        }
         int startPoint = pageable.getPageSize() * (pageable.getPageNumber() - 1);
         startPoint = startPoint > 0 ? startPoint : 0;
         List<LogResponseDto> entityList = res.subList(startPoint, startPoint + pageable.getPageSize())
