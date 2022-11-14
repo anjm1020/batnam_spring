@@ -36,6 +36,9 @@ public class Log {
     @Column(name = "log_result_image_url", columnDefinition = "VARCHAR(2083)")
     private String resultURL;
 
+    @Column(name = "log_is_critical")
+    private Boolean isCritical;
+
     @ManyToOne
     @JoinColumn(name = "sector_id")
     private Sector sector;

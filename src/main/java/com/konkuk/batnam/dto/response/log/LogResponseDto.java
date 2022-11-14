@@ -15,6 +15,7 @@ public class LogResponseDto {
     private String captureURL;
     private String result;
     private String resultURL;
+    private Boolean isCritical;
     private Long sectorId;
 
     public static LogResponseDto toResponseDto(Log entity) {
@@ -25,6 +26,7 @@ public class LogResponseDto {
                 entity.getCaptureURL(),
                 entity.getResult(),
                 entity.getResultURL(),
+                entity.getIsCritical(),
                 entity.getSector().getId()
         );
     }

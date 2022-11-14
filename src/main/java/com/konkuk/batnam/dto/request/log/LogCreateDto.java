@@ -34,6 +34,7 @@ public class LogCreateDto {
                 .result(this.result)
                 .resultURL(this.resultURL)
                 .objectName(this.objectName)
+                .isCritical(isCritical)
                 .sector(sector)
                 .build();
     }
